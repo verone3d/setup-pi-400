@@ -27,6 +27,8 @@ import {
   HardDrive,
   Key,
   FlaskConical,
+  Youtube,
+  ExternalLink as LinkOut,
 } from 'lucide-react'
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -40,6 +42,7 @@ const CHAPTERS = [
   { id: 5, title: 'Configure Git on Pi',  icon: GitBranch,   steps: 5 },
   { id: 6, title: 'Install Claude Code',  icon: Bot,         steps: 4 },
   { id: 7, title: 'Build a Flask App',    icon: FlaskConical,steps: 5 },
+  { id: 8, title: 'Advanced Usage Videos', icon: Youtube,   steps: 2 },
 ]
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1200,6 +1203,7 @@ function CompletionScreen({ onRestart }) {
           ['Git configured on Pi', 'Chapter 5'],
           ['Claude Code installed', 'Chapter 6'],
           ['Flask web app built & deployed', 'Chapter 7'],
+          ['Advanced Claude Code videos watched', 'Chapter 8'],
         ].map(([task, chapter]) => (
           <div
             key={task}
@@ -1327,10 +1331,86 @@ function Sidebar({ current, completed, onSelect, onClose, isMobile }) {
 
       <div className="px-4 py-3 border-t border-gray-800">
         <p className="text-xs text-gray-600 text-center">
-          Pi 400 Launch Pad · 7 Chapters
+          Pi 400 Launch Pad · 8 Chapters
         </p>
       </div>
     </nav>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CHAPTER 8 — Advanced Usage Videos
+// ─────────────────────────────────────────────────────────────────────────────
+const VIDEOS = [
+  {
+    id: 'ZlDnsf_DOzg',
+    title: 'Advanced Claude Code Usage',
+    url: 'https://youtu.be/ZlDnsf_DOzg?si=R9xc7nTEUo9-K4SZ',
+    description: 'Deep dive into advanced Claude Code workflows — multi-file editing, context management, and power-user techniques.',
+  },
+  {
+    id: 'Y09u_S3w2c8',
+    title: 'Claude Code in Action',
+    url: 'https://youtu.be/Y09u_S3w2c8?si=7odXqf-2J-LJRrVl',
+    description: 'Real-world Claude Code sessions showing how to build, debug, and iterate on projects using AI assistance.',
+  },
+]
+
+function VideoCard({ video }) {
+  return (
+    <div className="rounded-xl border border-gray-700 overflow-hidden bg-gray-900/60 mb-6">
+      {/* Embed */}
+      <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+        <iframe
+          className="absolute inset-0 w-full h-full"
+          src={`https://www.youtube.com/embed/${video.id}`}
+          title={video.title}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        />
+      </div>
+      {/* Info */}
+      <div className="px-4 py-3 flex items-start justify-between gap-3">
+        <div>
+          <h4 className="text-white font-semibold text-sm mb-1">{video.title}</h4>
+          <p className="text-gray-400 text-xs leading-relaxed">{video.description}</p>
+        </div>
+        <a
+          href={video.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 flex items-center gap-1.5 text-xs text-red-400 hover:text-red-300 border border-red-900/60 hover:border-red-700 bg-red-950/30 px-2.5 py-1.5 rounded-lg transition-all"
+        >
+          <Youtube size={13} />
+          YouTube
+          <LinkOut size={11} />
+        </a>
+      </div>
+    </div>
+  )
+}
+
+function Chapter8() {
+  return (
+    <div>
+      <p className="text-gray-300 leading-relaxed mb-6">
+        You've got the basics locked in. These videos go deeper — showing advanced Claude Code
+        techniques, real project workflows, and patterns that experienced developers use every day.
+        Watch them on this page or click through to YouTube.
+      </p>
+
+      <SectionTitle>Watch & Learn</SectionTitle>
+
+      {VIDEOS.map((v) => (
+        <VideoCard key={v.id} video={v} />
+      ))}
+
+      <Callout type="tip" title="Keep experimenting">
+        The best way to level up with Claude Code is to use it on real problems. Start with
+        something you actually want to build — Claude is most useful when you have a specific goal.
+      </Callout>
+    </div>
   )
 }
 
@@ -1345,6 +1425,7 @@ const CHAPTER_COMPONENTS = {
   5: Chapter5,
   6: Chapter6,
   7: Chapter7,
+  8: Chapter8,
 }
 
 const CHAPTER_SUBTITLES = {
@@ -1355,6 +1436,7 @@ const CHAPTER_SUBTITLES = {
   5: 'Link Git on the Pi to your GitHub account',
   6: 'Set up Claude Code, your AI coding assistant',
   7: 'Build and serve a real Flask app on your network',
+  8: 'Go deeper with video walkthroughs of Claude Code',
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
