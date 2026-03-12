@@ -22,13 +22,12 @@ import {
   Cpu,
   Menu,
   X,
-  ExternalLink,
+  ExternalLink as LinkOut,
   Rocket,
   HardDrive,
   Key,
   FlaskConical,
   Youtube,
-  ExternalLink as LinkOut,
 } from 'lucide-react'
 
 // ─────────────────────────────────────────────────────────────────────────────
